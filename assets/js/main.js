@@ -17,7 +17,7 @@ class MyCustomVTB {
         console.log('MINIWEBSITE: vtbData', msg.detail);
         this.buidApp(msg.detail);
       });
-
+      console.log('vtbReady');
       let event = new CustomEvent("vtbReady");
       window.vtb.dispatchEvent(event);
     }
@@ -32,6 +32,7 @@ class MyCustomVTB {
       this.$proposal.setAttribute('data-vtbobjectid', itinerary.TSOrder.texts.vtbObjectId);
       
       console.log('isLivePreview', vtbMessenger.isLivePreview);
+
       if(vtbMessenger.isLivePreview)
         this.edit();
     }
