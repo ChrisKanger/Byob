@@ -4,28 +4,31 @@
   "main": "gulpfile.js",
   "type": "module",
   "scripts": {
-    "build": "npm run clean && npm run copy && npm run webpack",
-    "copy": "cp index.html dist/ && cp -R assets/ dist/assets/",
-    "babel": "babel --presets es2015 ./assets/js/main.js -o ./dist/assets/js/main.js",
+    "build": "npm run clean && gulp scripts && npm run copy",
+    "copy": "cp index.html dist/ && cp -R assets/ dist/assets/ && rm -rf dist/assets/js",
     "clean": "rm -rf dist && mkdir dist",
-    "webpack": "webpack --config webpack.config.js",
     "start": "http-server -p 9002"
   },
   "author": "ZURB <foundation@zurb.com>",
   "license": "MIT",
   "dependencies": {
-    "@sitespirit/vtb-transformer": "^1.0.0",
-    "vtb-messenger": "0.0.1",
-    "cross-env": "^7.0.2",
-    "ejs": "^3.1.5"
+    "vtb-messenger": "0.0.9",
+    "@babel/register": "^7.12.1",
+    "babelify": "^10.0.0",
+    "ejs": "^3.1.5",
+    "gulp-browserify": "^0.5.1",
+    "http-server": "^0.12.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
-    "http-server": "^0.12.3",
-    "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0"
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-order": "^1.2.0",
+    "gulp-uglify": "^3.0.1"
   },
   "repository": {
     "type": "git",

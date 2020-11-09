@@ -1,3 +1,19 @@
 body {
-    background:red;
+    background:f0f0f0;
+}
+
+input, 
+textarea {
+    border:1px solid #fff;
+    background:none;
+    outline:none;
+    width: 600px;
+    font-size:30px;
+    margin:50px auto;
+    text-align: center;
+    display: block;
+}
+
+textarea {
+    font-size:15px;
 }

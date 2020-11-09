@@ -1,6 +1,6 @@
 const customTransforms = {
     'changeTitle' : (obj, params) => {
-        obj.dst.title = "Te gekke titel!";
+        obj.dst.title = obj.dst.title.toUpperCase();
         return obj;
     }
 };

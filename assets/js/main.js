@@ -1,33 +1,60 @@
-const vtbDataTransformer = require('@sitespirit/vtb-transformer');
+const vtbMessenger = require('vtb-messenger');
 
-console.log('tst');
 class MyCustomVTB {
 
     constructor() {
-        this.getItinerary();
-        console.log('wtf');
+      this.$title = document.querySelector('#title');
+      this.$proposal = document.querySelector('#proposal');
+
+      this.vtbInit();
     }
 
-    getItinerary()
+    vtbInit()
     {
-        console.log('abc');
-        var oReq = new XMLHttpRequest();
-        oReq.onreadystatechange = () => {
-          if (oReq.readyState === 4) {
-            this.itinerary = JSON.parse(oReq.response);
-            this.buildPage();
-          }
-        }
+      vtbMessenger.init();
+
+      window.vtb.addEventListener('vtbData', (msg) => {
+        console.log('MINIWEBSITE: vtbData', msg.detail);
+        this.buidApp(msg.detail);
+      });
+
+      let event = new CustomEvent("vtbReady");
+      window.vtb.dispatchEvent(event);
+    }
+
+
+    buidApp(itinerary)
+    {
+      this.$title.value = itinerary.title;
+      this.$title.setAttribute('data-vtbobjectid', itinerary.vtbObjectId);
+
+      this.$proposal.value = itinerary.TSOrder.texts.proposal;
+      this.$proposal.setAttribute('data-vtbobjectid', itinerary.TSOrder.texts.vtbObjectId);
       
-        oReq.open("GET", 'assets/json/itinerary.json', true);
-        oReq.send();
+      console.log('isLivePreview', vtbMessenger.isLivePreview);
+      if(vtbMessenger.isLivePreview)
+        this.edit();
     }
 
-    buildPage()
+
+    edit()
     {
-        this.itinerary = vtbDataTransformer.transform(this.itinerary);
-        console.log(this.itinerary);
-    }
-}
+      console.log('INIT EDIT');
+      let inputs = document.querySelectorAll('input, textarea');
+      if(!inputs) return;
 
+      inputs.forEach(element => {
+        element.addEventListener('change', (e) => {
+            console.log('MINIWEBSITE: vtbTextChanged');
+            let event = new CustomEvent("vtbTextChanged", { detail: {
+              propertyName: e.target.getAttribute('name'),
+              newValue: e.target.value,
+              vtbObjectId: e.target.getAttribute('data-vtbobjectid'),
+            }});
+            window.vtb.dispatchEvent(event);
+        });
+      })
+    }
+    
+}
 new MyCustomVTB();
