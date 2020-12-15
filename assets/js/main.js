@@ -14,10 +14,9 @@ class MyCustomVTB {
       vtbMessenger.init();
 
       window.vtb.addEventListener('vtbData', (msg) => {
-        console.log('MINIWEBSITE: vtbData', msg.detail);
         this.buidApp(msg.detail);
       });
-      console.log('vtbReady');
+
       let event = new CustomEvent("vtbReady");
       window.vtb.dispatchEvent(event);
     }
