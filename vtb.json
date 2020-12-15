@@ -1,9 +1,10 @@
 {
-    "dataTransformer": {
-      "customFileLocation": "customTransforms",
-      "methods": [
-        {"function": "changeTitle", "params": {}}
-      ],
-      "startWithEmptyObject": false
-    }
-  }
+  "dataTransformer": {
+    "customFileLocation": "customTransforms",
+    "methods": [
+      {"function": "changeTitle", "params": {}}
+    ],
+    "startWithEmptyObject": false
+  },
+  "itineraryFile": "vtbItinerary.json"
+}

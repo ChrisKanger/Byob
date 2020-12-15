@@ -4,7 +4,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "build": "npm run clean && gulp scripts && npm run copy",
-    "copy": "cp index.html dist/ && cp -R assets/ dist/assets/ && rm -rf dist/assets/js",
+    "copy": "cp index.html dist/ && cp -R assets/ dist/assets/ && rm -rf dist/assets/js && cp vtbItinerary.json dist/vtbItinerary.json && cp vtb.js dist/vtb.js && cp vtb.json dist/vtb.json && cp vtbMetadata.json dist/vtbMetadata.json",
     "clean": "rm -rf dist && mkdir dist",
     "start": "http-server -p 9002"
   },
