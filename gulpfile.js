@@ -30,7 +30,6 @@ function scripts() {
 }
 gulp.task('scripts', scripts);
 
-
 function serve() {
     gulp.watch("assets/js/**/*.js", scripts);
 }
